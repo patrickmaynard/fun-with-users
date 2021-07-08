@@ -4,7 +4,9 @@ RUN apt-get update && \
     apt-get install -y \
         zip \
         unzip \
-        netcat && \
+        netcat \
+        default-mysql-client \
+        && \
     apt-get clean && \
     pecl install \
         xdebug-3.0.2 && \
