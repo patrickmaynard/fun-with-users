@@ -14,13 +14,10 @@ services:
     App\Application\:
         resource: '../src/Application'
 
-    App\Infrastructure\:
-        resource: '../src/Infrastructure'
-
     # controllers are imported separately to make sure services can be injected
     # as action arguments even if you don't extend any base controller class
-    App\Infrastructure\UI\Web\:
-        resource: '../src/Infrastructure/UI/Web'
+    App\Controller\:
+        resource: '../src/Controller'
         tags: ['controller.service_arguments']
 
     # add more service definitions when explicit configuration is needed
