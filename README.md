@@ -13,5 +13,6 @@ To start the project & execute tests:
 ```shell
 $ docker-compose up -d
 $ docker-compose exec php composer install
+$ docker-compose exec php make db
 $ docker-compose exec php ./bin/phpunit
 ```
