@@ -16,11 +16,14 @@ services:
     working_dir: /var/www/
     links:
       - database
+    environment:
+      - DATABASE_URL
+      - MYSQL_ROOT_PASSWORD
   database:
     image: 'mariadb:latest'
     environment:
-      MYSQL_ROOT_PASSWORD: password
-      MYSQL_DATABASE: main
+      MYSQL_ROOT_PASSWORD: dbpassword
+      MYSQL_DATABASE: dbname
     ports:
       # To allow the host machine to access the ports below, modify the lines below.
       # For example, to allow the host to connect to port 3306 on the container, you would change
