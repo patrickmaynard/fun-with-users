@@ -16,3 +16,8 @@ $ docker-compose exec php composer install
 $ docker-compose exec php make db
 $ docker-compose exec php ./bin/phpunit
 ```
+
+To make a new entity:
+```
+$ docker-compose exec php console make:entity MyEntityName --force-annotation
+```
