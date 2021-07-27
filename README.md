@@ -1,11 +1,11 @@
 # Symfony project template
 
-This project contains a PHP 8.0 and a Nginx container.
-It includes the following tools/libraries:
+This project contains PHP 8.0 and a Nginx container.
+It comes with these tools/libraries:
 * Xdebug (see Dockerfile for options)
 * Composer 2
 * PHPUnit 9.5
-* Full Symfony (Flex) 5.x
+* Symfony (Flex) 5.x
 
 Nginx will run on port 8080 (see docker-compose.yml)
 
@@ -14,7 +14,8 @@ To start the project & execute tests:
 $ docker-compose up -d
 $ docker-compose exec php composer install
 $ docker-compose exec php make db
-$ docker-compose exec php ./bin/phpunit
+$ docker-compose exec make unit-tests
+$ docker-compose exec make acceptance-tests-resets-test-database
 ```
 
 To make a new entity:

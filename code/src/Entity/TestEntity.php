@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Symfony\Component\Serializer\Annotation\Groups;
 use App\Repository\TestEntityRepository;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -11,6 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
 class TestEntity
 {
     /**
+     * @Groups("test")
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
@@ -18,6 +20,7 @@ class TestEntity
     private $id;
 
     /**
+     * @Groups("test")
      * @ORM\Column(type="string", length=255)
      */
     private $name;
