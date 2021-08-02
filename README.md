@@ -10,7 +10,8 @@ It comes with these tools/libraries:
 Nginx will run on port 8080 (see docker-compose.yml)
 
 To set up git hooks:
-```
+```shell
+chmod +x .githooks/*
 git config --local core.hooksPath .githooks/
 ```
 
@@ -19,8 +20,8 @@ To start the project & execute tests:
 $ docker-compose up -d
 $ docker-compose exec php composer install
 $ docker-compose exec php make db
-$ docker-compose exec make unit-tests
-$ docker-compose exec make acceptance-tests-resets-test-database
+$ docker-compose exec php make unit-tests
+$ docker-compose exec php make acceptance-tests-resets-test-database
 ```
 
 To make a new entity:

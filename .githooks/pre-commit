@@ -7,7 +7,7 @@ $projectName = basename(getcwd()); // get the name of your app
 
 echo PHP_EOL;
 echo '+ Starting unit tests'.PHP_EOL;
-exec('cd docker && docker-compose run --rm php-fpm make unit-tests', $output, $returnCode);
+exec('docker-compose exec -T php make unit-tests', $output, $returnCode);
 if ($returnCode !== 0) {
   $testSummary = $output;
   printf("%s Test Summary: ", $projectName);
@@ -19,7 +19,7 @@ if ($returnCode !== 0) {
 
 echo PHP_EOL;
 echo '+ Starting acceptance tests'.PHP_EOL;
-exec('cd docker && docker-compose run --rm php-fpm make acceptance-tests-resets-test-database', $output, $returnCode);
+exec('docker-compose exec -T php make acceptance-tests-resets-test-database', $output, $returnCode);
 if ($returnCode !== 0) {
   $testSummary = $output;
   printf("%s Test Summary: ", $projectName);
