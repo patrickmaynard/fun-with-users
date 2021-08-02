@@ -13,7 +13,7 @@ if ($returnCode !== 0) {
   printf("%s Test Summary: ", $projectName);
   echo PHP_EOL;
   printf("( %s ) %s%2\$s", $testSummary[14], PHP_EOL);
-  printf("ABORTING COMMIT!\n");
+  printf("ABORTING COMMIT!\nUse 'docker-compose run --rm php make unit-tests' to see what went wrong.\n");
   exit(1); // git halts
 }
 
@@ -25,7 +25,7 @@ if ($returnCode !== 0) {
   printf("%s Test Summary: ", $projectName);
   echo PHP_EOL;
   printf("( %s ) %s%2\$s", $testSummary[14], PHP_EOL);
-  printf("ABORTING COMMIT!\n");
+  printf("ABORTING COMMIT!\nUse 'docker-compose run --rm php make acceptance-tests-resets-test-database' to see what went wrong\n");
   exit(1); // git halts
 }
 
