@@ -9,6 +9,11 @@ It comes with these tools/libraries:
 
 Nginx will run on port 8080 (see docker-compose.yml)
 
+To set up git hooks:
+```
+git config --local core.hooksPath .githooks/
+```
+
 To start the project & execute tests:
 ```shell
 $ docker-compose up -d

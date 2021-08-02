@@ -1,0 +1,33 @@
+#!/usr/bin/php
+<?php
+//Yes, this would normally be done by a shell script, not PHP.
+//But I couldn't resist copying from a page that perfectly matched my use case.
+//See https://medium.com/backticks-tildes/c905296c49bc
+$projectName = basename(getcwd()); // get the name of your app
+
+echo PHP_EOL;
+echo '+ Starting unit tests'.PHP_EOL;
+exec('cd docker && docker-compose run --rm php-fpm make unit-tests', $output, $returnCode);
+if ($returnCode !== 0) {
+  $testSummary = $output;
+  printf("%s Test Summary: ", $projectName);
+  echo PHP_EOL;
+  printf("( %s ) %s%2\$s", $testSummary[14], PHP_EOL);
+  printf("ABORTING COMMIT!\n");
+  exit(1); // git halts
+}
+
+echo PHP_EOL;
+echo '+ Starting acceptance tests'.PHP_EOL;
+exec('cd docker && docker-compose run --rm php-fpm make acceptance-tests-resets-test-database', $output, $returnCode);
+if ($returnCode !== 0) {
+  $testSummary = $output;
+  printf("%s Test Summary: ", $projectName);
+  echo PHP_EOL;
+  printf("( %s ) %s%2\$s", $testSummary[14], PHP_EOL);
+  printf("ABORTING COMMIT!\n");
+  exit(1); // git halts
+}
+
+
+exit(0); // git continues with push event
