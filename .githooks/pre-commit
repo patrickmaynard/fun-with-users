@@ -6,7 +6,15 @@
 $projectName = basename(getcwd()); // get the name of your app
 
 echo PHP_EOL;
-echo '+ Starting unit tests'.PHP_EOL;
+echo '+ Running Psalm...'.PHP_EOL;
+exec('docker-compose run --rm php ./vendor/bin/psalm', $output, $returnCode);
+if ($returnCode !== 0) {
+    printf("ABORTING COMMIT!\nUse 'docker-compose run --rm php ./vendor/bin/psalm' to see what went wrong.\n");
+    exit(1); // git halts
+}
+
+echo PHP_EOL;
+echo '+ Starting unit tests...'.PHP_EOL;
 exec('docker-compose run --rm php make unit-tests', $output, $returnCode);
 if ($returnCode !== 0) {
   $testSummary = $output;
@@ -18,7 +26,7 @@ if ($returnCode !== 0) {
 }
 
 echo PHP_EOL;
-echo '+ Starting acceptance tests'.PHP_EOL;
+echo '+ Starting acceptance tests...'.PHP_EOL;
 exec('docker-compose run --rm php make acceptance-tests-resets-test-database', $output, $returnCode);
 if ($returnCode !== 0) {
   $testSummary = $output;
@@ -28,6 +36,5 @@ if ($returnCode !== 0) {
   printf("ABORTING COMMIT!\nUse 'docker-compose run --rm php make acceptance-tests-resets-test-database' to see what went wrong\n");
   exit(1); // git halts
 }
-
 
 exit(0); // git continues with push event
