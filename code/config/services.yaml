@@ -11,8 +11,8 @@ services:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
 
-    App\Application\:
-        resource: '../src/Application'
+    #App\Application\:
+    #    resource: '../src/Application'
 
     # controllers are imported separately to make sure services can be injected
     # as action arguments even if you don't extend any base controller class
