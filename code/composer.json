@@ -15,6 +15,7 @@
         "doctrine/orm": "^2.9",
         "phpdocumentor/reflection-docblock": "*",
         "sensio/framework-extra-bundle": "*",
+        "sonata-project/admin-bundle": "3.100",
         "symfony/dotenv": "*",
         "symfony/flex": "*",
         "symfony/framework-bundle": "4.4.*",
@@ -91,7 +92,7 @@
     "extra": {
         "symfony": {
             "allow-contrib": false,
-            "require": "5.2.*"
+            "require": "*"
         },
         "patches": {
             "symfony/maker-bundle": {
