@@ -5,7 +5,7 @@ It comes with these tools/libraries:
 * Xdebug (see Dockerfile for options)
 * Composer 2
 * PHPUnit 9.5
-* Symfony (Flex) 5.x
+* Symfony (Flex) 4.x
 
 Nginx will run on port 8080 (see docker-compose.yml)
 
