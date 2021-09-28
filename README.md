@@ -10,7 +10,7 @@ It comes with these tools/libraries:
 
 Nginx will run on port 8080 (see docker-compose.yml)
 
-To set up git hooks for running psalm on commit (maybe among other things):
+To set up git hooks for running psalm and tests on commit:
 ```shell
 chmod +x .githooks/*
 git config --local core.hooksPath .githooks/
