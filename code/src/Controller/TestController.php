@@ -15,7 +15,6 @@ use Symfony\Component\Serializer\Serializer;
 
 class TestController
 {
-
     private EntityManagerInterface $entityManager;
     private array $encoders;
     private array $normalizers;

@@ -17,14 +17,24 @@ class UserFixtures extends Fixture implements ContainerAwareInterface
     {
         $userManager = $this->container->get('fos_user.user_manager');
 
-        /** @var SonataUserUser $user */
-        $user = $userManager->createUser();
-        $user->setUsername('superuser');
-        $user->setPlainPassword('password');
-        $user->setEnabled(true);
-        $user->setEmail('superuser@example.com');
-        $user->setRoles(array('ROLE_SUPER_ADMIN'));
+        /** @var SonataUserUser $user1 */
+        $user1 = $userManager->createUser();
+        $user1->setUsername('superuser');
+        $user1->setPlainPassword('password');
+        $user1->setEnabled(true);
+        $user1->setEmail('superuser@example.com');
+        $user1->setRoles(array('ROLE_SUPER_ADMIN'));
 
-        $userManager->updateUser($user, true);
+        $userManager->updateUser($user1, true);
+
+        /** @var SonataUserUser $user2 */
+        $user2 = $userManager->createUser();
+        $user2->setUsername('normaluser');
+        $user2->setPlainPassword('password');
+        $user2->setEnabled(true);
+        $user2->setEmail('normaluser@example.com');
+        $user2->setRoles(array('ROLE_USER'));
+
+        $userManager->updateUser($user2, true);
     }
 }

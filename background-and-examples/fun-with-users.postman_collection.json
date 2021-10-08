@@ -1,0 +1,221 @@
+{
+	"info": {
+		"_postman_id": "4b6d7af7-ac44-4ecc-a255-6f537c27a97e",
+		"name": "fun-with-users",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create user",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE2MzM3MTU3NjUsImV4cCI6MTYzMzcxOTM2NSwicm9sZXMiOlsiUk9MRV9TVVBFUl9BRE1JTiIsIlJPTEVfVVNFUiJdLCJ1c2VybmFtZSI6InN1cGVydXNlciJ9.WjskNqd5dt4ICWJ2pCIryd1yGdftWw02d66sJuq2CQQK2OQJIT7CySeS6y_MhXWGhdw4SrFfpSjXRLyJYbGnHPGg8c9e51pYdUK9mRzvulILTXXgRZidrojkl3X-jTiBXrwA7uV1MDMWpSmxU3mD63Beoepto6Q6vivtSRfVNk_tZwpEwhPXs47BLvKOFFFYkZfk4y6tF_UA8PR5WgeR0rTiXGqGh6m3Ui6m1OLyRae-VejGXHM0eP8VQPiXAs4rZrKEvFoKqi6ItXN9ZirzqwySnC12knC0QOc_-bH7_ZIilPrYlppGHJh5OkQ5U3skWv1OrlKO4k3FrUyQvvM1Vg",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"userName\":\"bobuser\",\n    \"email\":\"bobuser@example.com\",\n    \"plainPassword\":\"password\",\n    \"enabled\":true\n}"
+				},
+				"url": {
+					"raw": "localhost:8080/api/user",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"user"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
+					]
+				},
+				"description": "create-user"
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"username\":\"superuser\",\"password\":\"password\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/login_check",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"login_check"
+					]
+				},
+				"description": "Request to login as superuser and get a bearer token that can be used as part of an auth header for other requests."
+			},
+			"response": []
+		},
+		{
+			"name": "Delete user",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE2MzM2MzQ3NTAsImV4cCI6MTYzMzYzODM1MCwicm9sZXMiOlsiUk9MRV9TVVBFUl9BRE1JTiIsIlJPTEVfVVNFUiJdLCJ1c2VybmFtZSI6InN1cGVydXNlciJ9.lcD7wBSNcaWXgo6SnGfmVAEHmrB8ajqX1tVPC5R-D75yEFZ8RMZpt9j9hEoMn_GKq8E3K2NrFQOxo7RTT613cYcsImiAetIPlb7zuhQ2jwRQUVsLpyEl0BzT3SUToROGArWpfdHavxOR-xFVag_iEAaHlxRdR-3WwVvLu_8cJZKEWf9nvN2QRizMw4L40ZWXYEAy2ktqOwS4QF7BxfWy9ICVQ90UGgQYDdYFMy0MeVl-OsJ--sELACRrc5fPAYyyjX4TjvH6u11PEj34AxBU-9LOnUBB6J_a_cWUKNbzHFs-IBfZEVCYtUWE03NTQdG_qRDFvkrdmpG8zZZLpVUb8g",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/api/user/bobuser24",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"user",
+						"bobuser24"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create user group",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE2MzM3MTU3NjUsImV4cCI6MTYzMzcxOTM2NSwicm9sZXMiOlsiUk9MRV9TVVBFUl9BRE1JTiIsIlJPTEVfVVNFUiJdLCJ1c2VybmFtZSI6InN1cGVydXNlciJ9.WjskNqd5dt4ICWJ2pCIryd1yGdftWw02d66sJuq2CQQK2OQJIT7CySeS6y_MhXWGhdw4SrFfpSjXRLyJYbGnHPGg8c9e51pYdUK9mRzvulILTXXgRZidrojkl3X-jTiBXrwA7uV1MDMWpSmxU3mD63Beoepto6Q6vivtSRfVNk_tZwpEwhPXs47BLvKOFFFYkZfk4y6tF_UA8PR5WgeR0rTiXGqGh6m3Ui6m1OLyRae-VejGXHM0eP8VQPiXAs4rZrKEvFoKqi6ItXN9ZirzqwySnC12knC0QOc_-bH7_ZIilPrYlppGHJh5OkQ5U3skWv1OrlKO4k3FrUyQvvM1Vg",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\":\"customers\",\"roles\":[\"ROLE_USER\",\"ROLE_FOO\"]}"
+				},
+				"url": {
+					"raw": "localhost:8080/api/user-group",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"user-group"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete user group",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE2MzM3MTQ5MTUsImV4cCI6MTYzMzcxODUxNSwicm9sZXMiOlsiUk9MRV9TVVBFUl9BRE1JTiIsIlJPTEVfVVNFUiJdLCJ1c2VybmFtZSI6InN1cGVydXNlciJ9.JOQOzpwnnuFj4GjXzKQiUG6lETSBye-D9MP7KQ4_ng4LBoK2ATgkwmeDD4opPyHUIG9vViUBEKNdr85yE79qte54GRAGvj-r4-cGwuJmEfvvC8I2bjI1FKby9Bq3WGFU9ZhUz3Tfdk1PhPvkKx6fyngakofo1XE7ki1Qc-wEcuDtISsZKa6iZQQB6mtTf_9FA9OCN_U1ZCR8BNGIdUgnn-ajQyrENmqvVFBfXlcCe1bkyDVFQu58vLUMDxK9Di7f9CWZHyNO8q3ULdn0mjDnHMiZKiPGpgfh810EgWNr_dnwPHnAG4cT-lnZGl1_q_QqItmiWllj34Gz-zffe_KLGQ",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:8080/api/user-group/group7",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"user-group",
+						"group7"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add user to user group",
+			"request": {
+				"method": "LINK",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE2MzM3MTM5NDcsImV4cCI6MTYzMzcxNzU0Nywicm9sZXMiOlsiUk9MRV9TVVBFUl9BRE1JTiIsIlJPTEVfVVNFUiJdLCJ1c2VybmFtZSI6InN1cGVydXNlciJ9.Nt3jrfH8Y_jiKzvnoPGzP_hsTqlYeKSSwPdf-HS2eNhgVT67ZAiEqVyFgHzaXeW-x25hVr-XSWMSc2kg9o-u0fTMLOtc2sT9Aq8LUZRbmc2abPK46knl-ALpedT_cPzEiTk9awq1uzVBNFOGJbKUjvfDRkAnmCnzx5xrCb1_W0PbsBfYDUU35lLMk9wlxUOmCE7l4qUjKSSD8347apU4WRnmt5JbvNHvOacmucDIGN0shmEJC_7vzt2xcomI00WSKuMamuRGFl4vIXY65k6Fvdc-LWzIKWOlckI8FeYCL2tfEvVxRx3NdbwEETWhkErQiDxUmAXlUib0F0Hdes8Q7g",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/api/user-group/customers/bobuser",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"user-group",
+						"customers",
+						"bobuser"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Remove user from user group",
+			"request": {
+				"method": "UNLINK",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE2MzM3MTM5NDcsImV4cCI6MTYzMzcxNzU0Nywicm9sZXMiOlsiUk9MRV9TVVBFUl9BRE1JTiIsIlJPTEVfVVNFUiJdLCJ1c2VybmFtZSI6InN1cGVydXNlciJ9.Nt3jrfH8Y_jiKzvnoPGzP_hsTqlYeKSSwPdf-HS2eNhgVT67ZAiEqVyFgHzaXeW-x25hVr-XSWMSc2kg9o-u0fTMLOtc2sT9Aq8LUZRbmc2abPK46knl-ALpedT_cPzEiTk9awq1uzVBNFOGJbKUjvfDRkAnmCnzx5xrCb1_W0PbsBfYDUU35lLMk9wlxUOmCE7l4qUjKSSD8347apU4WRnmt5JbvNHvOacmucDIGN0shmEJC_7vzt2xcomI00WSKuMamuRGFl4vIXY65k6Fvdc-LWzIKWOlckI8FeYCL2tfEvVxRx3NdbwEETWhkErQiDxUmAXlUib0F0Hdes8Q7g",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/api/user-group/customers/bobuser",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"user-group",
+						"customers",
+						"bobuser"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
