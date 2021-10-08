@@ -1,9 +1,10 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Sonata\UserBundle\Entity\BaseGroup;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
@@ -17,4 +18,12 @@ class SonataUserGroup extends BaseGroup
      * @ORM\Column(type="integer")
      */
     protected $id;
+
+    /**
+     * @var string
+      * @Assert\NotBlank(
+     *     message = "The group name must not be blank."
+     * )
+     */
+    protected $name;
 }
