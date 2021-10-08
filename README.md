@@ -18,7 +18,7 @@ chmod +x .githooks/*
 git config --local core.hooksPath .githooks/
 ```
 
-To start the project & execute tests (of which there aren't many, since this project doesn't do anything custom yet):
+To start the project & execute tests:
 ```shell
 $ docker-compose up -d
 $ mv code/.env.dist code/.env
@@ -104,6 +104,7 @@ https://docs.sonata-project.org/projects/SonataUserBundle/en/4.x/reference/insta
 
 High-priority TODO items (convert to GitHub issues before doing further work):
 
+* Set up an actual database user in the Docker configuration other than root. Even locally, that's not a good look.
 * Make the UserService::checkIsAdmin() method less brittle by checking "real" roles.
 * Fix/add integration tests (abandoned after hours of frustration -- see comments in CreateUserTest.php)
 * Refactor to abstract some more controller logic into services. The controllers are a bit fat now, and there's some duplicated code.
