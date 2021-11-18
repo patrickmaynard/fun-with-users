@@ -117,3 +117,4 @@ Low-priority TODO items (convert to GitHub issues before doing further work):
 * In user creation endpoint, have serializer ignore any new properties by default instead of needing to update an entity class constant.
 * This should be done by converting from the Symfony serializer to the JMS serializer and using serialization groups.
 * Move hard-coded strings into class constants.
+* Make psalm stricter by one level, then move this item to a lower priority task and repeat after several other tasks.
