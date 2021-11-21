@@ -17,12 +17,21 @@ class UserServiceTest extends TestCase
     {
         $user = new SonataUserUser;
 
+        $projectDir = __DIR__ .
+            DIRECTORY_SEPARATOR .
+            '..' .
+            DIRECTORY_SEPARATOR .
+            '..' .
+            DIRECTORY_SEPARATOR
+        ;
+
         $entityManagerMock = $this
             ->createMock(EntityManagerInterface::class);
         $tokenMock = $this
             ->createMock(TokenInterface::class);
         $tokenMock->method('getUser')->willReturn($user);
-        $userService = new UserService($entityManagerMock);
+
+        $userService = new UserService($entityManagerMock, $projectDir);
 
         $booleanOne = $userService->checkApiUserIsAdmin($tokenMock);
         self::assertFalse($booleanOne);

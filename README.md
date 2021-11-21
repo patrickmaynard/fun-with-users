@@ -18,14 +18,19 @@ chmod +x .githooks/*
 git config --local core.hooksPath .githooks/
 ```
 
-To start the project & execute tests:
+To start the project, execute tests:
 ```shell
 $ docker-compose up -d
-$ mv code/.env.dist code/.env
+$ cp code/.env.dist code/.env
 $ docker-compose exec php composer install
 $ docker-compose exec php make db
 $ docker-compose exec php make unit-tests
 $ docker-compose exec php make acceptance-tests-resets-test-database
+```
+
+To regenerate keys for the Lexik JWT authentication bundle, do the following:
+```
+$ docker-compose exec php bin/console lexik:jwt:generate-keypair
 ```
 
 To log on via the API as a superuser, send a POST request to http://localhost:8080/api/login_check with a `Content-Type` header of `application/json` and the following raw body:
@@ -104,8 +109,6 @@ https://docs.sonata-project.org/projects/SonataUserBundle/en/4.x/reference/insta
 
 High-priority TODO items (convert to GitHub issues before doing further work):
 
-* Set up an actual database user in the Docker configuration other than root. Even locally, that's not a good look.
-* Make the UserService::checkIsAdmin() method less brittle by checking "real" roles.
 * Fix/add integration tests (abandoned after hours of frustration -- see comments in CreateUserTest.php)
 * Refactor to abstract some more controller logic into services. The controllers are a bit fat now, and there's some duplicated code.
 * Create a custom UserManager class to replace the deprecated FOSUserBundle version, and move some logic from the UserService to that manager.

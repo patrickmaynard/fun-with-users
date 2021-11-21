@@ -6,6 +6,7 @@ RUN apt-get update && \
         unzip \
         netcat \
         default-mysql-client \
+        vim \
         && \
     apt-get clean && \
     pecl install \
@@ -24,5 +25,6 @@ RUN curl --silent --show-error https://getcomposer.org/installer | php -- \
 RUN echo 'xdebug.client_port=9003' >> /usr/local/etc/php/php.ini
 RUN echo 'xdebug.mode=debug' >> /usr/local/etc/php/php.ini
 RUN echo 'xdebug.client_host=host.docker.internal' >> /usr/local/etc/php/php.ini
+RUN echo 'memory_limit=512M' >> /usr/local/etc/php/php.ini
 
 CMD ["php-fpm"]
