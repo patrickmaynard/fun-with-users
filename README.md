@@ -18,7 +18,7 @@ chmod +x .githooks/*
 git config --local core.hooksPath .githooks/
 ```
 
-To start the project, execute tests and make IDE autocompletion work:
+To start the project, execute tests:
 ```shell
 $ docker-compose up -d
 $ cp code/.env.dist code/.env
