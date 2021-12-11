@@ -109,7 +109,7 @@ https://docs.sonata-project.org/projects/SonataUserBundle/en/4.x/reference/insta
 
 High-priority TODO items (convert to GitHub issues before doing further work):
 
-* Fix/add integration tests (abandoned after hours of frustration -- see comments in CreateUserTest.php)
+* Fix/add integration tests for RUD operations on API. Also add a couple basic tests of Sonata.
 * Refactor to abstract some more controller logic into services. The controllers are a bit fat now, and there's some duplicated code.
 * Create a custom UserManager class to replace the deprecated FOSUserBundle version, and move some logic from the UserService to that manager.
 
@@ -121,3 +121,4 @@ Low-priority TODO items (convert to GitHub issues before doing further work):
 * This should be done by converting from the Symfony serializer to the JMS serializer and using serialization groups.
 * Move hard-coded strings into class constants.
 * Make psalm stricter by one level, then move this item to a lower priority task and repeat after several other tasks.
+* Refactor tests. There's some duplication of code now.
