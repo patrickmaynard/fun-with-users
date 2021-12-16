@@ -16,5 +16,5 @@ test-db:
 unit-tests:
 	./bin/phpunit tests/Unit/*
 
-acceptance-tests-resets-test-database: test-db
-	./bin/phpunit tests/Acceptance/*
+acceptance-tests-resets-database: db test-db
+	./bin/phpunit tests/Acceptance

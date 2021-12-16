@@ -27,13 +27,13 @@ if ($returnCode !== 0) {
 
 echo PHP_EOL;
 echo '+ Starting acceptance tests...'.PHP_EOL;
-exec('docker-compose run --rm php make acceptance-tests-resets-test-database', $output, $returnCode);
+exec('docker-compose run --rm php make acceptance-tests-resets-database', $output, $returnCode);
 if ($returnCode !== 0) {
   $testSummary = $output;
   printf("%s Test Summary: ", $projectName);
   echo PHP_EOL;
   printf("( %s ) %s%2\$s", $testSummary[14], PHP_EOL);
-  printf("ABORTING COMMIT!\nUse 'docker-compose run --rm php make acceptance-tests-resets-test-database' to see what went wrong\n");
+  printf("ABORTING COMMIT!\nUse 'docker-compose run --rm php make acceptance-tests-resets-database' to see what went wrong\n");
   exit(1); // git halts
 }
 

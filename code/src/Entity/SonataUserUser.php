@@ -62,6 +62,10 @@ class SonataUserUser extends BaseUser
      *     groups={"user_creation"},
      *     message = "The email '{{ value }}' is not a valid email."
      * )
+     * @Assert\NotBlank(
+     *     groups={"user_creation"},
+     *     message = "The email address must not be blank."
+     * )
      */
     protected $email;
 
