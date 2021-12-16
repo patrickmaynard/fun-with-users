@@ -17,4 +17,4 @@ unit-tests:
 	./bin/phpunit tests/Unit/*
 
 acceptance-tests-resets-database: db test-db
-	./bin/phpunit tests/Acceptance/*
+	./bin/phpunit tests/Acceptance
