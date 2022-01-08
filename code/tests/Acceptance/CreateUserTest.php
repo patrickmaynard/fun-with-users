@@ -201,6 +201,9 @@ class CreateUserTest extends WebTestCase
     }
 
     /**
+     * TODO: Move this method to an abstract parent class.
+     *       (It's currently redefined in both this and ReadUserTest.)
+     *
      * @return object
      * @throws GuzzleException
      */
@@ -228,5 +231,4 @@ class CreateUserTest extends WebTestCase
 
         return $firstResponseObj;
     }
-
 }

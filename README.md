@@ -110,7 +110,6 @@ https://docs.sonata-project.org/projects/SonataUserBundle/en/4.x/reference/insta
 High-priority TODO items (convert to GitHub issues before doing further work):
 
 * Add more test logic to existing (mostly empty) ReadUserTest class.
-* Add an endpoint on the API user controller that allows an admin to list all users, regardless of group.
 * Add an endpoint to the API group controller that allows an admin to list all users in a group.
 * Update test logic to cover edge cases.
 * Fix/add integration tests for RUD operations on API user endpoints. 
@@ -119,7 +118,8 @@ High-priority TODO items (convert to GitHub issues before doing further work):
 * Refactor to abstract some more controller logic into services. The controllers are a bit fat now, and there's some duplicated code.
 * Create a custom UserManager class to replace the deprecated FOSUserBundle version, and move some logic from the UserService to that manager.
 * Make endpoint urls adhere to the "APIs You Don't Hate" standard. (This will be fairly simple.)
-
+* Add versioning to the user API -- either via a route prefix or via a header.
+* Add pagination to the endpoints that list users.
 
 Low-priority TODO items (convert to GitHub issues before doing further work):
 
