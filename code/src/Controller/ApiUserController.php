@@ -125,6 +125,46 @@ class ApiUserController
     }
 
     /**
+     * @route("/api/users", methods={"GET"}, name="api_user_list_all_users")
+     * @param Request $request
+     * @param TokenStorageInterface $tokenStorage
+     * @return JsonResponse
+     */
+    public function listAllUsers(
+        Request $request,
+        TokenStorageInterface $tokenStorage
+    ) : JsonResponse
+    {
+        if (
+        !$this->userService->checkApiUserIsAdmin($tokenStorage->getToken())
+        ) {
+            return $this->getUnauthorizedResponse();
+        }
+        try {
+            $serializer = new Serializer($this->normalizers, $this->encoders);
+            $users = $this->userManager->findUsers();
+            return new JsonResponse($serializer->serialize(
+                $users,
+                'json',
+                [
+                    'json_encode_options' => JSON_UNESCAPED_SLASHES,
+                    AbstractNormalizer::IGNORED_ATTRIBUTES =>
+                        SonataUserUser::attributesToIgnore
+                ]
+            ),
+                201,
+                [],
+                true
+            );
+        } catch (\Exception $e) {
+            return new JsonResponse(
+                ['message' => $e->getMessage()],
+                500
+            );
+        }
+    }
+
+    /**
      * @param Request $request
      * @param Serializer $serializer
      * @return mixed
