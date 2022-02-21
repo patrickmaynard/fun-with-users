@@ -131,7 +131,6 @@ class ApiUserController
      * @return JsonResponse
      */
     public function listAllUsers(
-        Request $request,
         TokenStorageInterface $tokenStorage
     ) : JsonResponse
     {
@@ -152,7 +151,7 @@ class ApiUserController
                         SonataUserUser::attributesToIgnore
                 ]
             ),
-                201,
+                200,
                 [],
                 true
             );
@@ -163,6 +162,58 @@ class ApiUserController
             );
         }
     }
+
+
+
+    /**
+     * @route("/api/users/{userName}", methods={"GET"}, name="api_user_read_user")
+     * @param string $userName
+     * @param Request $request
+     * @param TokenStorageInterface $tokenStorage
+     * @return JsonResponse
+     */
+    public function readUser(
+        string $userName,
+        TokenStorageInterface $tokenStorage
+    ) : JsonResponse
+    {
+        if (
+        !$this->userService->checkApiUserIsAdmin($tokenStorage->getToken())
+        ) {
+            return $this->getUnauthorizedResponse();
+        }
+        $userToShow = $this
+            ->userManager
+            ->findUserByUsername($userName)
+        ;
+        if (is_null($userToShow)) {
+            $message = 'User ' . $userName . ' could not be found.';
+            return new JsonResponse(['message' => $message], 404);
+        }
+        try {
+            $serializer = new Serializer($this->normalizers, $this->encoders);
+            return new JsonResponse($serializer->serialize(
+                $userToShow,
+                'json',
+                [
+                    'json_encode_options' => JSON_UNESCAPED_SLASHES,
+                    AbstractNormalizer::IGNORED_ATTRIBUTES =>
+                        SonataUserUser::attributesToIgnore
+                ]
+            ),
+                200,
+                [],
+                true
+            );
+        } catch (\Exception $e) {
+            return new JsonResponse(
+                ['message' => $e->getMessage()],
+                500
+            );
+        }
+    }
+
+
 
     /**
      * @param Request $request

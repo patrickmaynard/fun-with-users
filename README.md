@@ -107,9 +107,9 @@ Documentation I used for setting up the Sonata user bundle:
 
 https://docs.sonata-project.org/projects/SonataUserBundle/en/4.x/reference/installation/
 
-High-priority TODO items (convert to GitHub issues before doing further work):
-
-* Add more test logic to existing (mostly empty) ReadUserTest class.
+High-priority TODO items:
+    
+* Refactor tests. There's some duplication of code now.
 * Add an endpoint to the API group controller that allows an admin to list all users in a group.
 * Update test logic to cover edge cases.
 * Fix/add integration tests for RUD operations on API user endpoints. 
@@ -120,13 +120,14 @@ High-priority TODO items (convert to GitHub issues before doing further work):
 * Make endpoint urls adhere to the "APIs You Don't Hate" standard. (This will be fairly simple.)
 * Add versioning to the user API -- either via a route prefix or via a header.
 * Add pagination to the endpoints that list users.
+* Add something like /api/users/me for CRUDing a user's own information. (Currently, only admins can retrieve user info.)
 
 Low-priority TODO items (convert to GitHub issues before doing further work):
 
 * Create OpenAPI documentation (not a priority because of the Postman collection).
+* Make psalm stricter by one level, then move this item to a lower priority task and repeat after several other tasks.
 * Grow the length of time each JWT is valid for -- right now, it expires after an hour.
 * In user creation endpoint, have serializer ignore any new properties by default instead of needing to update an entity class constant.
 * This should be done by converting from the Symfony serializer to the JMS serializer and using serialization groups.
 * Move hard-coded strings into class constants.
-* Make psalm stricter by one level, then move this item to a lower priority task and repeat after several other tasks.
-* Refactor tests. There's some duplication of code now.
+* Handle Guzzle exceptions in tests

@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "4b6d7af7-ac44-4ecc-a255-6f537c27a97e",
+		"_postman_id": "b2333a76-b873-42b9-9690-c3b4f93f3b8b",
 		"name": "fun-with-users",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -212,6 +212,32 @@
 						"user-group",
 						"customers",
 						"bobuser"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List all users",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE2NDU0NjY1MDEsImV4cCI6MTY0NTQ3MDEwMSwicm9sZXMiOlsiUk9MRV9TVVBFUl9BRE1JTiIsIlJPTEVfVVNFUiJdLCJ1c2VybmFtZSI6InN1cGVydXNlciJ9.lYA3w23peTJq81LYZcyUIMdFslJck-TcXykpvOKY2Ng2x125RC6xnB9uuFGjje4wNjxa69vqZ0WBOkn6Hs_3Y6MFFjIsSfOmM1Jmzkx2l49lauvwHwjy25Al6RJfeVhS7PiPDNDWeIiosZMLQH4SOQhX-Lx47PhjwnIGeFum_KhI_s2A_5313EUx4Pgbckxi8U3_0o6fkxmzNPjXVd6-6zoBDqkU7s3k16THtijbnBwvuCW7t_sz3-y6b7Upwx1re2GS5KycT2wtATKUIi6KXqkp9E1LNGRdnoUKXIj2g_0WTKrQLwsRpm5q1IdC427fsvFWsyytDTRsMQflfj3IHQ",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"users"
 					]
 				}
 			},

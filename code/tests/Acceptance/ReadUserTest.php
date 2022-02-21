@@ -10,6 +10,7 @@ class ReadUserTest extends WebTestCase
 {
     const LOGIN_RELATIVE_URL = '/api/login_check';
     const LIST_USERS_RELATIVE_URL = '/api/users';
+    const READ_USER_RELATIVE_URL = '/api/users/superuser';
 
     public function testGetAllUsersWithAdminSucceeds(): void
     {
@@ -28,7 +29,7 @@ class ReadUserTest extends WebTestCase
             true
         );
 
-        self::assertEquals(201, $secondResponse->getStatusCode());
+        self::assertEquals(200, $secondResponse->getStatusCode());
         self::assertIsArray($secondResponseArray);
         self::assertCount(3, $secondResponseArray);
         self::assertEquals(
@@ -59,24 +60,62 @@ class ReadUserTest extends WebTestCase
 
     }
 
+
+    public function testReadUserWithAdminSucceeds(): void
+    {
+        $firstResponseObj = $this->getSuperUserAuthenticationResponseObject();
+        $urlTwo = $_ENV['HOST_STRING'].self::READ_USER_RELATIVE_URL;
+        $client = new \GuzzleHttp\Client();
+        $secondResponse = $client->request('GET', $urlTwo, [
+            'headers' => [
+                'Content-Type' => 'application/json',
+                'Authorization' => 'Bearer ' . $firstResponseObj->token
+            ]
+        ]);
+
+        $secondResponseArray = json_decode(
+            $secondResponse->getBody()->getContents(),
+            true
+        );
+
+        self::assertEquals(200, $secondResponse->getStatusCode());
+        self::assertIsArray($secondResponseArray);
+        self::assertGreaterThan(18, $secondResponseArray);
+        self::assertEquals(
+            'superuser',
+            $secondResponseArray['username']
+        );
+        self::assertEquals(
+            'superuser@example.com',
+            $secondResponseArray['email']
+        );
+        self::assertEquals(
+            [0 => 'ROLE_SUPER_ADMIN', 1 => 'ROLE_USER'],
+            $secondResponseArray['roles']
+        );
+        self::assertEquals(
+            true,
+            $secondResponseArray['accountNonExpired']
+        );
+        self::assertEquals(
+            true,
+            $secondResponseArray['accountNonLocked']
+        );
+        self::assertEquals(
+            true,
+            $secondResponseArray['credentialsNonExpired']
+        );
+        //dd($secondResponseArray);
+    }
+
+
+
     function testGetAllUsersWithNonAdminFails(): void
     {
-        $dotEnv = new Dotenv();
-        $dotEnv->overload(__DIR__ . '/../../.env');
-        if (file_exists(__DIR__ . '/../../.env.local')) {
-            $dotEnv->overload(__DIR__ . '/../../.env.local');
-        }
-        $dotEnv->overload(__DIR__.'/../../.env.test');
-        $urlOne = $_ENV['HOST_STRING'] . self::LOGIN_RELATIVE_URL;
-        $client = new \GuzzleHttp\Client();
-        $firstResponse = $client->request('POST', $urlOne, [
-            'body' => '{"username":"normaluser","password":"password"}',
-            'headers' => ['Content-Type' => 'application/json']
-        ]);
+        $firstResponseObj = $this->getNormalUserAuthenticationResponseObject();
+
         $urlTwo = $_ENV['HOST_STRING'] . self::LIST_USERS_RELATIVE_URL;
-        $firstResponseObj = json_decode(
-            $firstResponse->getBody()->getContents()
-        );
+        $client = new \GuzzleHttp\Client();
         try {
             $secondResponse = $client->request(
                 'GET',
@@ -93,10 +132,35 @@ class ReadUserTest extends WebTestCase
             $statusCode = $e->getCode();
         }
         self::assertEquals(403, $statusCode);
-        //TODO: Build the endpoint to show all users and the test.
-
-        self::assertTrue(true);
     }
+
+
+
+    function testReadUserWithNonAdminFails(): void
+    {
+        $firstResponseObj = $this->getNormalUserAuthenticationResponseObject();
+
+        $urlTwo = $_ENV['HOST_STRING'] . self::READ_USER_RELATIVE_URL;
+        $client = new \GuzzleHttp\Client();
+        try {
+            $secondResponse = $client->request(
+                'GET',
+                $urlTwo,
+                [
+                    'headers' => [
+                        'Content-Type' => 'application/json',
+                        'Authorization' => 'Bearer '.$firstResponseObj->token,
+                    ],
+                ]
+            );
+            $statusCode = $secondResponse->getStatusCode();
+        } catch (GuzzleException $e) {
+            $statusCode = $e->getCode();
+        }
+        self::assertEquals(403, $statusCode);
+    }
+
+
 
     /**
      * TODO: Move this method to an abstract parent class.
@@ -120,6 +184,37 @@ class ReadUserTest extends WebTestCase
             $urlOne,
             [
                 'body' => '{"username":"superuser","password":"password"}',
+                'headers' => ['Content-Type' => 'application/json']
+            ]
+        );
+        $firstResponseObj = json_decode(
+            $firstResponse->getBody()->getContents()
+        );
+
+        return $firstResponseObj;
+    }
+
+    /**
+     * TODO: Move this method to an abstract parent class.
+     *
+     * @return object
+     * @throws GuzzleException
+     */
+    private function getNormalUserAuthenticationResponseObject(): object
+    {
+        $dotEnv = new Dotenv();
+        $dotEnv->overload(__DIR__.'/../../.env');
+        if (file_exists(__DIR__.'/../../.env.local')) {
+            $dotEnv->overload(__DIR__.'/../../.env.local');
+        }
+        $dotEnv->overload(__DIR__.'/../../.env.test');
+        $urlOne = $_ENV['HOST_STRING'].self::LOGIN_RELATIVE_URL;
+        $client = new \GuzzleHttp\Client();
+        $firstResponse = $client->request(
+            'POST',
+            $urlOne,
+            [
+                'body' => '{"username":"normaluser","password":"password"}',
                 'headers' => ['Content-Type' => 'application/json']
             ]
         );
