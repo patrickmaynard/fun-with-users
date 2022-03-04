@@ -6,9 +6,8 @@ use GuzzleHttp\Exception\GuzzleException;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\Dotenv\Dotenv;
 
-class CreateUserTest extends WebTestCase
+class CreateUserTest extends AbstractUserTest
 {
-    const LOGIN_RELATIVE_URL = '/api/login_check';
     const CREATE_USER_RELATIVE_URL = '/api/user';
 
     public function testCreateUserWithAdminSucceeds(): void
@@ -198,37 +197,5 @@ class CreateUserTest extends WebTestCase
             $statusCode = $e->getCode();
         }
         self::assertEquals(403, $statusCode);
-    }
-
-    /**
-     * TODO: Move this method to an abstract parent class.
-     *       (It's currently redefined in both this and ReadUserTest.)
-     *
-     * @return object
-     * @throws GuzzleException
-     */
-    private function getSuperUserAuthenticationResponseObject(): object
-    {
-        $dotEnv = new Dotenv();
-        $dotEnv->overload(__DIR__.'/../../.env');
-        if (file_exists(__DIR__.'/../../.env.local')) {
-            $dotEnv->overload(__DIR__.'/../../.env.local');
-        }
-        $dotEnv->overload(__DIR__.'/../../.env.test');
-        $urlOne = $_ENV['HOST_STRING'].self::LOGIN_RELATIVE_URL;
-        $client = new \GuzzleHttp\Client();
-        $firstResponse = $client->request(
-            'POST',
-            $urlOne,
-            [
-                'body' => '{"username":"superuser","password":"password"}',
-                'headers' => ['Content-Type' => 'application/json']
-            ]
-        );
-        $firstResponseObj = json_decode(
-            $firstResponse->getBody()->getContents()
-        );
-
-        return $firstResponseObj;
     }
 }

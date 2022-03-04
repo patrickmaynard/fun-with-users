@@ -109,7 +109,7 @@ https://docs.sonata-project.org/projects/SonataUserBundle/en/4.x/reference/insta
 
 High-priority TODO items:
     
-* Refactor tests. There's some duplication of code now.
+x Refactor tests to remove duplication of code.
 * Add an endpoint to the API group controller that allows an admin to list all users in a group.
 * Update test logic to cover edge cases.
 * Fix/add integration tests for RUD operations on API user endpoints. 
@@ -125,9 +125,10 @@ High-priority TODO items:
 Low-priority TODO items (convert to GitHub issues before doing further work):
 
 * Create OpenAPI documentation (not a priority because of the Postman collection).
+* Make sure that your documentation page's sandboxing feature works.
 * Make psalm stricter by one level, then move this item to a lower priority task and repeat after several other tasks.
 * Grow the length of time each JWT is valid for -- right now, it expires after an hour.
 * In user creation endpoint, have serializer ignore any new properties by default instead of needing to update an entity class constant.
 * This should be done by converting from the Symfony serializer to the JMS serializer and using serialization groups.
 * Move hard-coded strings into class constants.
-* Handle Guzzle exceptions in tests
+* Handle any unhandled Guzzle exceptions in tests
