@@ -110,7 +110,8 @@ https://docs.sonata-project.org/projects/SonataUserBundle/en/4.x/reference/insta
 High-priority TODO items:
     
 x Refactor tests to remove duplication of code.
-* Add an endpoint to the API group controller that allows an admin to list all users in a group.
+x Add an endpoint to the API group controller that allows an admin to list all users in a group.
+* Update fixtures and test logic so you're using a more neutral group name than "customers" when testing your new listUsersByGroup endpoint.
 * Update test logic to cover edge cases.
 * Fix/add integration tests for RUD operations on API user endpoints. 
 * Fix/add integration tests for CRUD operations on API group endpoints.

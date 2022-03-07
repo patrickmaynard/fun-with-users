@@ -247,6 +247,61 @@ class ApiUserGroupController
         return new JsonResponse(['message' => $message], 200);
     }
 
+
+    /**
+     * @route("/api/user-group/{userGroupName}/users", methods={"GET"}, name="api_group_list_users_by_group")
+     * @param Request $request
+     * @param TokenStorageInterface $tokenStorage
+     * @return JsonResponse
+     */
+    public function listUsersByGroup(
+        string $userGroupName,
+        TokenStorageInterface $tokenStorage
+    ) : JsonResponse
+    {
+        if (
+        !$this->userService->checkApiUserIsAdmin($tokenStorage->getToken())
+        ) {
+            return $this->getUnauthorizedResponse();
+        }
+        $userGroup = $this
+            ->userGroupManager
+            ->findGroupByName($userGroupName)
+        ;
+        if (is_null($userGroup)) {
+            $message = 'Group ' . $userGroupName . ' could not be found.';
+            return new JsonResponse(['message' => $message], 404);
+        }
+        try {
+            $serializer = new Serializer($this->normalizers, $this->encoders);
+            $users = $this
+                ->userService
+                ->findByGroup($userGroup)
+            ;
+            return new JsonResponse($serializer->serialize(
+                $users,
+                'json',
+                [
+                    'json_encode_options' => JSON_UNESCAPED_SLASHES,
+                    AbstractNormalizer::IGNORED_ATTRIBUTES =>
+                        SonataUserUser::attributesToIgnore
+                ]
+            ),
+                200,
+                [],
+                true
+            );
+        } catch (\Exception $e) {
+            return new JsonResponse(
+                [
+                    'message' => $e->getMessage(),
+                    'trace' => $e->getTrace()
+                ],
+                500
+            );
+        }
+    }
+
     /**
      * @param Request $request
      * @param Serializer $serializer
