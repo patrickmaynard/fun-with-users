@@ -3,7 +3,6 @@
 namespace App\Tests\Acceptance;
 
 use GuzzleHttp\Exception\GuzzleException;
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\Dotenv\Dotenv;
 
 class CreateUserTest extends AbstractUserTest

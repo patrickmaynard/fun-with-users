@@ -111,17 +111,18 @@ High-priority TODO items:
     
 x Refactor tests to remove duplication of code.
 x Add an endpoint to the API group controller that allows an admin to list all users in a group.
-* Update fixtures and test logic so you're using a more neutral group name than "customers" when testing your new listUsersByGroup endpoint.
-* Update test logic to cover edge cases.
+x Update fixtures and test logic so you're using a more neutral group name than "customers".
 * Fix/add integration tests for RUD operations on API user endpoints. 
-* Fix/add integration tests for CRUD operations on API group endpoints.
-* Also add a couple basic tests of Sonata.
+* Fix/add integration tests for CUD operations on API group endpoints.
+* Update test logic to cover edge cases.
+* Also add a couple basic unit tests of Sonata classes to make sure they're installed.
 * Refactor to abstract some more controller logic into services. The controllers are a bit fat now, and there's some duplicated code.
 * Create a custom UserManager class to replace the deprecated FOSUserBundle version, and move some logic from the UserService to that manager.
 * Make endpoint urls adhere to the "APIs You Don't Hate" standard. (This will be fairly simple.)
 * Add versioning to the user API -- either via a route prefix or via a header.
 * Add pagination to the endpoints that list users.
 * Add something like /api/users/me for CRUDing a user's own information. (Currently, only admins can retrieve user info.)
+* Audit tests for isolation. (Some early tests may not have been well isolated.)
 
 Low-priority TODO items (convert to GitHub issues before doing further work):
 

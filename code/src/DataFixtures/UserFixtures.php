@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace App\DataFixtures;
 
@@ -8,6 +8,7 @@ use Doctrine\Persistence\ObjectManager;
 use App\Entity\SonataUserUser;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
+use FOS\UserBundle\Model\UserManager;
 
 class UserFixtures extends Fixture implements ContainerAwareInterface
 {
